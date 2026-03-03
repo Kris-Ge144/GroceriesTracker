@@ -2,7 +2,13 @@ stock = {"Milch": 2, "Äpfel": 4, "Bananen": 3, "Avocados": 1, "Gurken": 1, "Tom
 buy = {}
 
 def show_stock(stock):
+    print("Vorhandene Produkte:")
     for item, amount in stock.items():
+        print(item, "-", amount)
+
+def show_buy(buy):
+    print("Einkaufsliste:")
+    for item, amount in buy.items():
         print(item, "-", amount)
 
 
@@ -21,6 +27,14 @@ def add_stock(stock):
 def remove_stock(stock, buy):
     used_item = input("Produkt benutzen: ").strip()
     used_amount = int(input("Benutzte Menge: "))
+
+    if used_item not in stock:
+        print("Lebensmittel nicht vorhanden!")
+        return
+
+    if used_amount > stock[used_item]:
+        print("Es sind nur ", stock[used_item], "", used_item, "vorhanden!")
+        return
 
     if used_item in stock and used_amount < stock[used_item]:
         stock[used_item] -= used_amount
@@ -45,13 +59,17 @@ def add_buy(buy):
 def bought(buy, stock):
     bought_item = input("Produkt gekauft: ").strip()
     bought_amount = int(input("Menge gekauft: "))
-    if bought_item in buy and bought_amount >= buy[bought_item]:
-        buy.pop(bought_item)
-        stock[bought_item] = bought_amount
 
+    if bought_item  in buy:
+        if bought_amount >= buy[bought_item]:
+            buy.pop(bought_item)
+        else:
+            buy[bought_item] -= bought_amount
+
+    if bought_item in stock:
+        stock[bought_item] += bought_amount
     else:
         stock[bought_item] = bought_amount
-        buy[bought_item] -= bought_amount
 
 
 
