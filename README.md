@@ -10,9 +10,21 @@ The project was built as a practical learning exercise to strengthen core progra
 
 At the same time, it serves as a functional tool to track stock levels and automatically generate a shopping list.
 
+
 ## Features
+
 - Add products to stock
 - Remove products from stock
 - Automatically move empty items to shopping list
 - Add purchased items back to stock
 - Simple CLI-based interaction
+
+
+## Future Improvements
+
+- Add input validation and improved error handling
+- Implement JSON-based data persistence
+- Introduce configurable restock rules (minimum stock & restock quantity)
+- Improve CLI usability (number-based selection)
+- Add product categories
+- Develop a graphical user interface (GUI) for improved usability
