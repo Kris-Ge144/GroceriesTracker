@@ -2,12 +2,16 @@ stock = {"Milch": 2, "Äpfel": 4, "Bananen": 3, "Avocados": 1, "Gurken": 1, "Tom
 buy = {}
 
 def show_stock(stock):
-    print("Vorhandene Produkte:")
+    print("\nVorhandene Produkte:")
     for item, amount in stock.items():
         print(item, "-", amount)
 
 def show_buy(buy):
-    print("Einkaufsliste:")
+    if not buy:
+        print("\nEinkaufsliste ist leer!")
+        return
+
+    print("\nEinkaufsliste:")
     for item, amount in buy.items():
         print(item, "-", amount)
 
@@ -18,10 +22,10 @@ def add_stock(stock):
 
     if item in stock:
         stock[item] += amount
-        print("Es wurden ", amount,"", item," hinzugefügt!")
+        print("\nEs wurden ", amount,"", item," hinzugefügt!")
     else:
         stock[item] = amount
-        print("Es wurden ", amount,"", item," hinzugefügt!")
+        print("\nEs wurden ", amount,"", item," hinzugefügt!")
 
 
 def remove_stock(stock, buy):
@@ -70,6 +74,40 @@ def bought(buy, stock):
         stock[bought_item] += bought_amount
     else:
         stock[bought_item] = bought_amount
+
+def main():
+    while True:
+        print("\n=== GroceryTracker ===")
+        print("\n1 - Vorrat anzeigen")
+        print("2 - Vorrat hinzufügen")
+        print("3 - Vorrat verbrauchen")
+        print("4 - Einkaufsliste anzeigen")
+        print("5 - Zur Einkaufsliste hinzufügen")
+        print("6 - Gekauft (Zum Vorrat hinzufügen)")
+        print("0 - Beenden")
+
+        choice = input("\nAuswahl: ").strip()
+
+        if choice == "1":
+            show_stock(stock)
+        elif choice == "2":
+            add_stock(stock)
+        elif choice == "3":
+            remove_stock(stock, buy)
+        elif choice == "4":
+            show_buy(buy)
+        elif choice == "5":
+            add_buy(buy)
+        elif choice == "6":
+            bought(buy, stock)
+        elif choice == "0":
+            print("Programm beendet.")
+            break
+        else:
+            print("Ungültige Auswahl. Bitte 0-6 eingeben.")
+
+if __name__ == "__main__":
+    main()
 
 
 
