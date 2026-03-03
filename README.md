@@ -9,3 +9,10 @@ The project was built as a practical learning exercise to strengthen core progra
 - Basic input validation
 
 At the same time, it serves as a functional tool to track stock levels and automatically generate a shopping list.
+
+## Features
+- Add products to stock
+- Remove products from stock
+- Automatically move empty items to shopping list
+- Add purchased items back to stock
+- Simple CLI-based interaction
