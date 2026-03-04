@@ -17,8 +17,21 @@ def show_buy(buy):
 
 
 def add_stock(stock):
+
     item = input("Produkt: ").strip()
-    amount = int(input("Menge: "))
+    if not item:
+        print("Produktname darf nicht leer sein.")
+        return
+
+    try:
+        amount = int(input("Menge: "))
+    except ValueError:
+        print("Bitte eine Zahl eingeben.")
+        return
+
+    if amount <= 0:
+        print("Menge muss größer als 0 sein.")
+        return
 
     if item in stock:
         stock[item] += amount
@@ -29,8 +42,21 @@ def add_stock(stock):
 
 
 def remove_stock(stock, buy):
+
     used_item = input("Produkt benutzen: ").strip()
-    used_amount = int(input("Benutzte Menge: "))
+    if not used_item:
+        print("Produktname darf nicht leer sein.")
+        return
+
+    try:
+        used_amount = int(input("Benutzte Menge: "))
+    except ValueError:
+        print("Bitte eine Zahl eingeben.")
+        return
+
+    if used_amount <= 0:
+        print("Menge muss größer als 0 sein.")
+        return
 
     if used_item not in stock:
         print("Lebensmittel nicht vorhanden!")
@@ -40,11 +66,11 @@ def remove_stock(stock, buy):
         print("Es sind nur ", stock[used_item], "", used_item, "vorhanden!")
         return
 
-    if used_item in stock and used_amount < stock[used_item]:
+    if used_amount < stock[used_item]:
         stock[used_item] -= used_amount
-
-    elif used_item in stock and used_amount >= stock[used_item]:
+    else:
         stock.pop(used_item)
+        buy[used_item] = buy.get(used_item, 0) + 1
 
         if used_item in buy:
             buy[used_item] += 1
@@ -52,8 +78,21 @@ def remove_stock(stock, buy):
             buy[used_item] = 1
 
 def add_buy(buy):
+
     buy_item = input("Produkt kaufen: ").strip()
-    buy_amount = int(input("Menge kaufen: "))
+    if not buy_item:
+        print("Produktname darf nicht leer sein.")
+        return
+
+    try:
+        buy_amount = int(input("Menge kaufen: "))
+    except ValueError:
+        print("Bitte eine Zahl eingeben.")
+        return
+
+    if buy_amount <= 0:
+        print("Menge muss größer als 0 sein.")
+        return
 
     if buy_item in buy:
         buy[buy_item] += buy_amount
@@ -61,8 +100,21 @@ def add_buy(buy):
         buy[buy_item] = buy_amount
 
 def bought(buy, stock):
+
     bought_item = input("Produkt gekauft: ").strip()
-    bought_amount = int(input("Menge gekauft: "))
+    if not bought_item:
+        print("Produktname darf nicht leer sein.")
+        return
+
+    try:
+        bought_amount = int(input("Menge gekauft: "))
+    except ValueError:
+        print("Bitte eine Zahl eingeben.")
+        return
+
+    if bought_amount <= 0:
+        print("Menge muss größer als 0 sein.")
+        return
 
     if bought_item  in buy:
         if bought_amount >= buy[bought_item]:
