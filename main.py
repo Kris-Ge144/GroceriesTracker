@@ -35,10 +35,10 @@ def add_stock(stock):
 
     if item in stock:
         stock[item] += amount
-        print("\nEs wurden ", amount,"", item," hinzugefügt!")
     else:
         stock[item] = amount
-        print("\nEs wurden ", amount,"", item," hinzugefügt!")
+
+    print("Produkt zum Vorrat hinzugefügt:",item,"-",amount)
 
 
 def remove_stock(stock, buy):
@@ -72,10 +72,7 @@ def remove_stock(stock, buy):
         stock.pop(used_item)
         buy[used_item] = buy.get(used_item, 0) + 1
 
-        if used_item in buy:
-            buy[used_item] += 1
-        else:
-            buy[used_item] = 1
+    print("Produkt aus Vorrat genommen:", used_item, "-", used_amount)
 
 def add_buy(buy):
 
@@ -98,6 +95,8 @@ def add_buy(buy):
         buy[buy_item] += buy_amount
     else:
         buy[buy_item] = buy_amount
+
+    print("Zur Einkaufsliste hinzugefügt:", buy_item, "-", buy_amount)
 
 def bought(buy, stock):
 
@@ -126,6 +125,8 @@ def bought(buy, stock):
         stock[bought_item] += bought_amount
     else:
         stock[bought_item] = bought_amount
+
+    print("Zum Vorrat hinzugefügt: ", bought_item, "-", bought_amount)
 
 def main():
     while True:
