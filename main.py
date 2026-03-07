@@ -1,12 +1,38 @@
-stock = {"Milch": 2, "Äpfel": 4, "Bananen": 3, "Avocados": 1, "Gurken": 1, "Tomaten": 2}
-buy = {}
+import json
 
-def show_stock(stock):
+
+def save_data(stock, buy):
+    data = {
+        "stock": stock,
+        "buy": buy,
+    }
+    with open("data.json", "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
+
+
+def load_data():
+    try:
+        with open("data.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+            return data["stock"], data["buy"]
+    except FileNotFoundError:
+        return {
+            "Milch": 2,
+            "Apfel": 4,
+            "Banane": 3,
+            "Avocado": 1,
+            "Gurke": 1,
+            "Tomate": 2,
+        }, {}
+
+stock, buy = load_data()
+
+def show_stock(stock, buy):
     print("\nVorhandene Produkte:")
     for item, amount in stock.items():
         print(item, "-", amount)
 
-def show_buy(buy):
+def show_buy(stock, buy):
     if not buy:
         print("\nEinkaufsliste ist leer!")
         return
@@ -16,7 +42,7 @@ def show_buy(buy):
         print(item, "-", amount)
 
 
-def add_stock(stock):
+def add_stock(stock, buy):
 
     item = input("Produkt: ").strip()
     if not item:
@@ -39,6 +65,8 @@ def add_stock(stock):
         stock[item] = amount
 
     print("Produkt zum Vorrat hinzugefügt:",item,"-",amount)
+
+    save_data(stock, buy)
 
 
 def remove_stock(stock, buy):
@@ -74,7 +102,9 @@ def remove_stock(stock, buy):
 
     print("Produkt aus Vorrat genommen:", used_item, "-", used_amount)
 
-def add_buy(buy):
+    save_data(stock, buy)
+
+def add_buy(stock, buy):
 
     buy_item = input("Produkt kaufen: ").strip()
     if not buy_item:
@@ -98,7 +128,9 @@ def add_buy(buy):
 
     print("Zur Einkaufsliste hinzugefügt:", buy_item, "-", buy_amount)
 
-def bought(buy, stock):
+    save_data(buy, buy_item)
+
+def bought(stock, buy):
 
     bought_item = input("Produkt gekauft: ").strip()
     if not bought_item:
@@ -128,6 +160,8 @@ def bought(buy, stock):
 
     print("Zum Vorrat hinzugefügt: ", bought_item, "-", bought_amount)
 
+    save_data(stock, buy)
+
 def main():
     while True:
         print("\n=== GroceryTracker ===")
@@ -142,17 +176,17 @@ def main():
         choice = input("\nAuswahl: ").strip()
 
         if choice == "1":
-            show_stock(stock)
+            show_stock(stock, buy)
         elif choice == "2":
-            add_stock(stock)
+            add_stock(stock, buy)
         elif choice == "3":
             remove_stock(stock, buy)
         elif choice == "4":
-            show_buy(buy)
+            show_buy(stock, buy)
         elif choice == "5":
-            add_buy(buy)
+            add_buy(stock, buy)
         elif choice == "6":
-            bought(buy, stock)
+            bought(stock, buy)
         elif choice == "0":
             print("Programm beendet.")
             break
@@ -161,12 +195,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
