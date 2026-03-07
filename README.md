@@ -22,8 +22,6 @@ At the same time, it serves as a functional tool to track stock levels and autom
 
 ## Future Improvements
 
-- Add input validation and improved error handling
-- Implement JSON-based data persistence
 - Introduce configurable restock rules (minimum stock & restock quantity)
 - Improve CLI usability (number-based selection)
 - Add product categories
