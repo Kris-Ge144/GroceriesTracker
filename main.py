@@ -129,7 +129,7 @@ def add_buy(stock, buy):
 
     print("Zur Einkaufsliste hinzugefügt:", buy_item, "-", buy_amount)
 
-    save_data(buy, buy)
+    save_data(stock, buy)
 
 def bought(stock, buy):
 
