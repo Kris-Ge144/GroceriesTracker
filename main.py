@@ -1,18 +1,19 @@
 import json
 
+DATA_FILE = "data.json"
 
 def save_data(stock, buy):
     data = {
         "stock": stock,
         "buy": buy,
     }
-    with open("data.json", "w", encoding="utf-8") as file:
+    with open(DATA_FILE, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 
 def load_data():
     try:
-        with open("data.json", "r", encoding="utf-8") as file:
+        with open(DATA_FILE, "r", encoding="utf-8") as file:
             data = json.load(file)
             return data["stock"], data["buy"]
     except FileNotFoundError:
